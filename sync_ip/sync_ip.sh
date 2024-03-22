@@ -1,19 +1,17 @@
 #!/bin/bash
-source /home/pi_emitter/ir_emitter.conf
+source /usr/local/lightgate/config.sh
 
-
-dirname=data_$ROOMNAME
-mkdir -p /home/pi_emitter/$dirname 
+dirname=ip_$ROOMNAME
+sudo mkdir -p /usr/local/lightgate/$dirname 
 
 hostn=$(hostname)
 filename=ip_$hostn.txt
 
+echo "$(hostname -I)" >> /usr/local/lightgate/$filename
+echo "$(date)" >> /usr/local/lightgate/$filename
 
-echo "$(hostname -I)" >> /home/pi_emitter/$filename
-echo "$(date)" >> /home/pi_emitter/$filename
 
+sudo mv /usr/local/lightgate/$filename /usr/local/lightgate/$dirname/$filename
 
-mv /home/pi_emitter/$filename /home/pi_emitter/$dirname/$filename
-
-sshpass -p Ha1lll1oo1 rsync -aPvbc -e 'ssh -p 8080' /home/pi_emitter/$dirname/ pi_server@masterarbeit.ddns.net:$dirname 
+sshpass -p Ha1lll1oo1 rsync -aPvbc -e 'ssh -p 8080' /usr/local/lightgate/$dirname/ pi_server@masterarbeit.ddns.net:$dirname 
 

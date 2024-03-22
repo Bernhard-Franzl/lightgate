@@ -18,7 +18,19 @@ class Device:
         self.system_path = system_dir
         os.makedirs(os.path.dirname(self.system_path), exist_ok=True)
     
-    
+    def generate_bash_config_file(self):
+        """
+        Generates a bash config file.
+        """
+        with open(os.path.join(self.working_dir, "config.sh"), "w") as file:
+            
+            file.write(f"ROOMNAME={self.roomname}\n")
+            file.write(f"DOORNUMBER={self.doornumber}\n")
+            file.write(f"DEVICETYPE={self.device_type}\n")
+            
+        self.copy_file(os.path.join(self.working_dir, "config.sh"), os.path.join(self.install_dir, "config.sh"))
+        
+        
     def install_packages(self, packages):
         subprocess.run(["sudo", "apt", "update"])
         for package in packages:

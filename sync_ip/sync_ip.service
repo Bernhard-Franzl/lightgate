@@ -3,7 +3,7 @@ Description=Sync data
 #Requires=sync_ip.service
 
 [Service]
-ExecStart=/bin/bash /usr/local/lightgate/sync_ip.sh
+ExecStart=/bin/bash /usr/local/lightgate/sync_ip/sync_ip.sh
 #User=pi_emitter
 
 [Install]

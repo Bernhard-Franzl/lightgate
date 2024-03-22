@@ -10,7 +10,8 @@ class Receiver(Device):
         """
         super().__init__(self.device_type, working_dir, install_dir, system_dir, roomname, doornumber)
         
-        self.service_list = ["receiver", "sync_data", "sync_ip", "archive_management"]      
+        #self.service_list = ["receiver", "sync_data", "sync_ip", "archive_management"]      
+        self.service_list = ["sync_ip"]    
         
     def setup_receiver(self):
         
@@ -21,6 +22,9 @@ class Receiver(Device):
         # Call the install_packages function
         self.install_packages(packages_to_install)
         
+        # generate the bash config file
+        self.generate_bash_config_file()
+        print("Bash configuration file generated.")
         
         # generate the ir receiver configuration file
         self.generate_ir_receiver_conf()
