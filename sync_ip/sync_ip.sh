@@ -1,7 +1,7 @@
 #!/bin/bash
 source /home/pi_emitter/ir_emitter.conf
 
-echo $ROOMNAME
+
 dirname=data_$ROOMNAME
 mkdir -p /home/pi_emitter/$dirname 
 

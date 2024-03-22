@@ -1,0 +1,7 @@
+python3-rpi.gpio
+network-manager
+net-tools
+raspi-config
+wireless-tools
+sshpass
+openssh-server
