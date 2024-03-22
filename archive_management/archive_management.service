@@ -1,6 +1,5 @@
 [Unit]
-Description=Manage the data local data on the pi_receiver
-#Wants=
+Description=Manage the data local data
 
 [Service]
 Type=oneshot
