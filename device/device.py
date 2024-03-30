@@ -29,8 +29,7 @@ class Device:
             file.write(f"DEVICETYPE={self.device_type}\n")
             
         self.copy_file(os.path.join(self.working_dir, "config.sh"), os.path.join(self.install_dir, "config.sh"))
-        
-        
+             
     def install_packages(self, packages):
         subprocess.run(["sudo", "apt", "update"])
         for package in packages:
@@ -68,7 +67,7 @@ class Device:
                             
             elif file.endswith(".conf"):
                 self.copy_file(os.path.join(self.working_dir, directory, file),
-                                os.path.join(self.system_path, "ir_receiver.service.d", file))
+                                os.path.join(self.system_path, f"{directory}.service.d", file))
             
             elif file.endswith(".py") or file.endswith(".txt") or file.endswith(".sh"):
                 self.copy_file(os.path.join(self.working_dir, directory, file),
@@ -100,3 +99,35 @@ class Device:
                 os.system(f"sudo systemctl start {service}.timer")
             else:
                 os.system(f"sudo systemctl start {service}.service")
+
+    def disable_services(self, service_list:list, has_timer_list:list):
+        """
+        Disables services or the respective timers.
+        """
+        for i, service in enumerate(service_list):
+            if has_timer_list[i]:
+                os.system(f"sudo systemctl disable {service}.timer")
+                os.system(f"sudo systemctl disable {service}.service")
+            else:
+                os.system(f"sudo systemctl disable {service}.service")
+                
+    def stop_services(self, service_list:list, has_timer_list:list):
+        """
+        Stops services.
+        """
+        for i, service in enumerate(service_list):
+            if has_timer_list[i]:
+                os.system(f"sudo systemctl stop {service}.timer")
+                os.system(f"sudo systemctl stop {service}.service")
+            else:
+                os.system(f"sudo systemctl stop {service}.service")
+    
+    def restart_services(self, service_list:list, has_timer_list:list):
+        """
+        Restarts services.
+        """
+        for i, service in enumerate(service_list):
+            if has_timer_list[i]:
+                os.system(f"sudo systemctl restart {service}.timer")
+            else:
+                os.system(f"sudo systemctl restart {service}.service")

@@ -4,5 +4,4 @@ Description=Manage the data local data
 [Service]
 Type=oneshot
 ExecStart=/bin/bash /usr/local/lightgate/archive_management/archive_management.sh
-User=berni
 

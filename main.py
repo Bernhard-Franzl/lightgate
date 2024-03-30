@@ -1,4 +1,5 @@
-from receiver.receiver import Receiver
+from receiver.receiver_device import Receiver
+from emitter.emitter_device import Emitter
 import configparser
 import os 
 
@@ -15,18 +16,23 @@ device_roomname = config.get('Device', 'Roomname')
 device_doornumber = config.getint('Device', 'Doornumber')
 
 # Create a new instance of the Device class
+dir_path = os.path.dirname(os.path.realpath(__file__))
+
 if device_type == "receiver":
 
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-
-    device = Receiver(working_dir=dir_path, install_dir=device_install_dir, system_dir=device_system_dir, 
+    receiver = Receiver(working_dir=dir_path, install_dir=device_install_dir, system_dir=device_system_dir, 
                     roomname=device_roomname, doornumber=device_doornumber)
     
-    device.setup_receiver()
+    receiver.setup()
+    #receiver.disable()
     
 elif device_type == "emitter":
-    pass
+    emitter = Emitter(working_dir=dir_path, install_dir=device_install_dir, system_dir=device_system_dir, 
+                    roomname=device_roomname, doornumber=device_doornumber)
+    
+    emitter.setup(install_pigpio=True)
+    #emitter.disable()
 
 else:
-    raise Exception("Unknown device type.")
+    raise Exception("Unknown Device Type")
 

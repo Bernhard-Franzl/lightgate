@@ -3,7 +3,7 @@ Description=IR Emitter
 Requires=pigpiod.service 
 
 [Service]
-ExecStart=/usr/bin/python3 home/pi_emitter/ir_emitter.py
+ExecStart=/usr/bin/python3 /usr/local/lightgate/emitter/emitter_functional.py
 StandardOutput=syslog
 Restart=on-failure
 

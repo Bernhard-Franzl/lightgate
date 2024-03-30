@@ -15,17 +15,6 @@ cd pigpio-master
 make
 sudo make install
 
-sudo nano /etc/systemd/system/pigpiod.service
-[Unit]
-Description=Daemon required to control GPIO pins via pigpio
-[Service]
-ExecStart=/usr/local/bin/pigpiod
-ExecStop=/bin/systemctl kill -s SIGKILL pigpiod
-Type=forking
-[Install]
-WantedBy=multi-user.target
-
-
 4.) scp pi_emitter directory from pi_server//
 
 ping masterarbeit.ddns.net

@@ -4,5 +4,6 @@ Description=Daemon required to control GPIO pins via pigpio
 ExecStart=/usr/local/bin/pigpiod
 ExecStop=/bin/systemctl kill -s SIGKILL pigpiod
 Type=forking
+
 [Install]
 WantedBy=multi-user.target
