@@ -1,10 +1,10 @@
 [Unit]
 Description=Sync data
-Requires=sync_ip.service
+Requires=ir_receiver.service
 
 [Service]
-ExecStart=/bin/bash /home/pi_receiver/sync_data.sh
-User=pi_receiver
+ExecStart=/bin/bash /usr/local/lightgate/sync_data/sync_data.sh
+#User=pi_receiver
 
 [Install]
 WantedBy=multi-user.target

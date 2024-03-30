@@ -1,5 +1,5 @@
 [Unit]
-Description=Sync data
+Description=Sync IP
 #Requires=sync_ip.service
 
 [Service]

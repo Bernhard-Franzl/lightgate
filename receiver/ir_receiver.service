@@ -1,15 +1,12 @@
 [Unit]
 Description=IR Receiver
-After=systemd-timesyncd.service
 Requires=systemd-timesyncd.service
 
 [Service]
 Type=simple
-ExecStart=/bin/python3 ir_receiver.py -r $ROOMNAME -d $DOORNUMBER 
+ExecStart=/bin/python3 receiver/receiver_functional.py -r $ROOMNAME -d $DOORNUMBER 
 StandardOutput=syslog
 Restart=on-failure
-
-#/home/pi_receiver/
 
 [Install]
 WantedBy=multi-user.target

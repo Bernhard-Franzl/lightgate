@@ -4,7 +4,7 @@ import datetime
 import re
 import shutil
 
-path="/home/pi_receiver/"
+path="/usr/local/lightgate/"
 pattern="data_*/"
 stored_days = 14
 
