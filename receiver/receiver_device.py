@@ -71,6 +71,6 @@ class Receiver(Device):
         with open(os.path.join(self.working_dir,"receiver","receiver.conf"), "w") as f:
             f.write(f"[Service]\n")
             f.write(f"""Environment="ROOMNAME={self.roomname}"\n""")
-            f.write(f"""Environment="DOORNAME={self.doornumber}"\n""")
+            f.write(f"""Environment="DOORNUMBER={self.doornumber}"\n""")
             f.write(f"WorkingDirectory={self.install_dir}\n")
     
