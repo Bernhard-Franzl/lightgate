@@ -7,3 +7,4 @@ openssh-server
 unzip
 make
 python3-setuptools
+python3-regex

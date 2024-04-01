@@ -45,7 +45,7 @@ class Emitter(Device):
         os.system("sudo systemctl daemon-reload")
         
         print("Starting the services...")
-        self.start_services(self.service_list, has_timer_list)
+        self.restart_services(self.service_list, has_timer_list)
         
         print("###################################")
         print("Do not forget to change hostname!")

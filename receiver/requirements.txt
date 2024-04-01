@@ -5,4 +5,4 @@ raspi-config
 wireless-tools
 sshpass
 openssh-server
-regex
+python3-regex
