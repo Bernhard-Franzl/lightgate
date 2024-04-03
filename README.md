@@ -1,10 +1,2 @@
 # Lightgate Repository
-## used in my masters thesis
-
-## TODO's:
-
-Einen globalen Dateipfad einführen
-
-Python requirement files machen -> auto install aller packete
-
-Setup script machen!
+This repository is used to run an setup the lightgates used for the data collection in my masters thesis
