@@ -1,4 +1,5 @@
-# Masterarbeit
+# Lightgate Repository
+## used in my masters thesis
 
 ## TODO's:
 
