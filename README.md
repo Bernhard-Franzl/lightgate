@@ -1,9 +1,2 @@
-# Masterarbeit
-
-## TODO's:
-
-Einen globalen Dateipfad einführen
-
-Python requirement files machen -> auto install aller packete
-
-Setup script machen!
+# Lightgate Repository
+This repository is used to run and setup the lightgates used for the data collection in my masters thesis
