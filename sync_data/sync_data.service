@@ -1,6 +1,6 @@
 [Unit]
 Description=Sync data
-Requires=ir_receiver.service
+Requires=receiver.service
 
 [Service]
 ExecStart=/bin/bash /usr/local/lightgate/sync_data/sync_data.sh
