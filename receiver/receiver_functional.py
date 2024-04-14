@@ -133,6 +133,13 @@ def detect_mode(inpin_1, inpin_2, outpin_1, outpin_2, sampling_rate, sys_args):
 		# some sanity checks to prevent bugs
 		if (one_counter_1 >= sampling_rate*10) or (one_counter_2 >= sampling_rate*10):
 			print(f"Too many ones at receiver. Please check system in {sys_args.roomname} at door {sys_args.doornumber}!")
+   
+			# write "error message" into csv
+			timestamp = time.asctime(time.localtime())
+			with open(f"data_{sys_args.roomname}/door{sys_args.doornumber}.csv", "a", newline="") as file:
+				writer = csv.writer(file)
+				writer.writerow([2, timestamp, entering_counter, leaving_counter, in_counter, out_counter, event_one_counter_1, event_one_counter_2])
+    
 			discard_next = True
 			one_counter_1, one_counter_2, event_one_counter_1, event_one_counter_2 = 0, 0, 0, 0 
 		
