@@ -27,7 +27,7 @@ def process_sensor_value(sensor_value, sampling_rate, one_counter, zero_counter,
 	if sensor_value == 1:
 		one_counter += 1 
 		
-		if one_counter > (sampling_rate//20):
+		if one_counter > (sampling_rate//10):
 			possible_event = True
 		
 	else:
@@ -124,10 +124,10 @@ def detect_mode(inpin_1, inpin_2, outpin_1, outpin_2, sampling_rate, sys_args):
 		)
 	
 		#counter for walking direction
-		if possible_event_1 and (not possible_event_2) and not (event_confirmed_1 or event_confirmed_2):
+		if possible_event_1 and (not possible_event_2) and (not (event_confirmed_1 or event_confirmed_2)):
 			in_counter += 1
 			
-		if possible_event_2 and not possible_event_1 and not (event_confirmed_1 or event_confirmed_2):
+		if possible_event_2 and (not possible_event_1) and (not (event_confirmed_1 or event_confirmed_2)):
 			out_counter += 1
 		
 		# some sanity checks to prevent bugs
