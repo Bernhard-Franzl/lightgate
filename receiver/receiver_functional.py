@@ -84,6 +84,10 @@ def detect_mode(inpin_1, inpin_2, outpin_1, outpin_2, sampling_rate, sys_args):
 	discard_next = False
 	
 	# initiialize lots of counters
+	############### new line ################
+	overflow_counter = 0
+	#########################################
+ 
 	event_one_counter_1, event_one_counter_2 = 0, 0
 	one_counter_1, one_counter_2 = 0, 0
 	zero_counter_1, zero_counter_2 = 0, 0
@@ -133,19 +137,30 @@ def detect_mode(inpin_1, inpin_2, outpin_1, outpin_2, sampling_rate, sys_args):
 		# some sanity checks to prevent bugs
 		if (one_counter_1 >= (sampling_rate*10)) or (one_counter_2 >= (sampling_rate*10)):
 			print(f"Too many ones at receiver. Please check system in {sys_args.roomname} at door {sys_args.doornumber}!")
-   
+
 			# write "error message" into csv
 			timestamp = time.asctime(time.localtime())
 			with open(f"data_{sys_args.roomname}/door{sys_args.doornumber}.csv", "a", newline="") as file:
 				writer = csv.writer(file)
 				writer.writerow([3, timestamp, entering_counter, leaving_counter, in_counter, out_counter, event_one_counter_1, event_one_counter_2])
-    
+
 			discard_next = True
 			one_counter_1, one_counter_2, event_one_counter_1, event_one_counter_2, in_counter, out_counter = 0, 0, 0, 0, 0, 0
+
+   			############### new line ################
+			overflow_counter += 1
+			if overflow_counter > 15:
+				# reboot system
+				os.system("reboot")
+			#########################################
 		
 		# use event detection and walking direction to count leaving and entering people
 		if event_confirmed_1 and event_confirmed_2:
-			
+      
+			############### new line ################
+			overflow_counter = 0
+			#########################################
+   
 			if discard_next:
 				# write "error message" into csv
 				timestamp = time.asctime(time.localtime())
@@ -185,7 +200,6 @@ def detect_mode(inpin_1, inpin_2, outpin_1, outpin_2, sampling_rate, sys_args):
 		elif event_confirmed_1 and (not event_confirmed_2):
 			only_one += 1 
 			if only_one >= (2*sampling_rate):
-    
 				timestamp = time.asctime(time.localtime())
 				with open(f"data_{sys_args.roomname}/door{sys_args.doornumber}.csv", "a", newline="") as file:
 					writer = csv.writer(file)
@@ -197,7 +211,6 @@ def detect_mode(inpin_1, inpin_2, outpin_1, outpin_2, sampling_rate, sys_args):
 		elif event_confirmed_2 and (not event_confirmed_1):
 			only_one += 1 
 			if only_one >= (2*sampling_rate):
-       
 				timestamp = time.asctime(time.localtime())
 				with open(f"data_{sys_args.roomname}/door{sys_args.doornumber}.csv", "a", newline="") as file:
 					writer = csv.writer(file)
@@ -211,6 +224,10 @@ def detect_mode(inpin_1, inpin_2, outpin_1, outpin_2, sampling_rate, sys_args):
 				nothing_counter += 1
 				
 				if nothing_counter > sampling_rate:
+					############### new line ################
+					overflow_counter = 0
+					#########################################
+     
 					discard_next = False
 					event_one_counter_1, event_one_counter_2, in_counter, out_counter, only_one, nothing_counter = 0, 0, 0, 0, 0, 0	
 			
